@@ -66,14 +66,20 @@ class TripService {
         let t1 = new Trip('paris', 'Paris', 'img/paris.jpg')
         let t2 = new Trip('nantes', 'Nantes', 'img/nantes.jpg')
         let t3 = new Trip('rio-de-janeiro', 'Rio de Janeiro', 'img/rio-de-janeiro.jpg')
-        let trips = new Set();
-        trips.add(t1);
-        trips.add(t2);
-        trips.add(t3);
+        this.trips = new Set();
+        this.trips.add(t1);
+        this.trips.add(t2);
+        this.trips.add(t3);
     }
 
     findByName(tripName) {
-        // TODO return promise
+        return new Promise(function (resolve, reject) {
+            if(this.trips.has(tripName)){
+                resolve(trips.get(tripName).toString());
+            }else{
+                reject("No trip with name " + tripName);
+            }
+        })
     }
 }
 
@@ -100,3 +106,5 @@ class PriceService {
         })
     }
 }
+tripService  = new TripService();
+tripService.findByName("paris");
